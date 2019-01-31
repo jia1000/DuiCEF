@@ -1,0 +1,48 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<Window size="970,650">
+<VerticalLayout bkcolor="#FFF0F0F0" bkcolor2="#FFAAAAA0"> <!-- 整个窗口的背景色 -->
+        <!-- 标题栏区 -->
+        <HorizontalLayout height="32" bkcolor="#FFE6E6DC" bkcolor2="#FFAAAAA0"> <!-- 标题栏背景色 bkcolor、bkcolor2、bkcolor3分别是渐变色的三个值-->     
+			<VerticalLayout width="95">
+				<HorizontalLayout width="95" inset="12,6,2,6">
+					<Label name="title_ico" width="16" height="16" bkimage="file='sysbtn\logo_demo.png'"/>	
+				</HorizontalLayout>					
+			</VerticalLayout>  
+			
+            <VerticalLayout /> <!-- 占空位，占据左边所有的空位-->
+			
+            <VerticalLayout width="95"> <!-- 右边三个控件所占的宽度-->
+				<HorizontalLayout width="95" inset="2,6,2,6">
+					<Button name="btn_sysmin" 		width="28" height="20" tooltip="最小化" normalimage="file='sysbtn/btn_mini_normal.png'" hotimage="file='sysbtn/btn_mini_highlight.png'" pushedimage="file='sysbtn/btn_mini_down.png' "/>
+					<Button name="btn_restore" 	width="28" height="20" tooltip="还原" visible="false" normalimage="file='sysbtn/btn_restore_normal.png'" hotimage="file='sysbtn/btn_restore_highlight.png'" pushedimage="file='sysbtn/btn_restore_down.png' "/>
+					<Button name="btn_sysmax"   	width="28" height="20" tooltip="最大化" normalimage="file='sysbtn/btn_max_normal.png'" hotimage="file='sysbtn/btn_max_highlight.png'" pushedimage="file='sysbtn/btn_max_down.png' "/>
+					<Button name="btn_sysclose" 	width="39" height="20" tooltip="关闭" normalimage="file='sysbtn/btn_close_normal.png'" hotimage="file='sysbtn/btn_close_highlight.png'" pushedimage="file='sysbtn/btn_close_down.png' "/>
+				</HorizontalLayout>
+			</VerticalLayout>  
+			
+        </HorizontalLayout>
+        
+		<!-- 浏览器导航栏-->
+		<HorizontalLayout height="28" visible="true">
+			<Control width="2"/>
+			<Button name="btn_back" text="后退" width="88" height="28" tooltip="后退" textcolor="#FF454545" hottextcolor="#FF111111" bordersize="1" bordercolor="#FF969696" borderround="1"/>
+			<Control width="2"/>
+			<Button name="btn_forward" text="前进" width="88" height="28" tooltip="前进" textcolor="#FF454545" hottextcolor="#FF111111" bordersize="1" bordercolor="#FF969696" borderround="1"/>
+			<Control width="2"/>
+			<Button name="btn_refresh" text="刷新" width="88" height="28" tooltip="刷新" textcolor="#FF454545" hottextcolor="#FF111111" bordersize="1" bordercolor="#FF969696" borderround="1"/>
+			<Control width="2"/>
+			<Button name="btn_stop" text="停止" width="88" height="28" tooltip="停止" textcolor="#FF454545" hottextcolor="#FF111111" bordersize="1" bordercolor="#FF969696" borderround="1"/>
+			<Control width="2"/>
+			<Edit name="edit_address" tipvalue="url address..." maxchar="2000" style="edit_style" bordersize="1" bordercolor="#FF969696" borderround="2" />
+			<Control width="2"/>
+			<Button name="btn_ok" text="确定" width="88" height="28" visible="false" tooltip="确定" textcolor="#FF454545" hottextcolor="#FF111111" bordersize="1" bordercolor="#FF969696" borderround="1"/>
+			<Control width="2"/>
+		</HorizontalLayout>
+		
+        <!-- 客户区 -->
+		<VerticalLayout bktrans="false" bkcolor="#FF1D1F21">
+			<Cef url="192.168.1.251/main" padding="2,1,2,1" />			
+		</VerticalLayout>
+		
+    </VerticalLayout>
+</Window>

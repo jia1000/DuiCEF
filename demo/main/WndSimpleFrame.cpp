@@ -67,7 +67,7 @@ LRESULT CWndSimpleFrame::OnCreate(UINT uMsg, WPARAM wParam, LPARAM lParam, BOOL&
 
 	CDialogBuilder builder;
 	CDialogBuilderCallbackEx cb;
-	CControlUI* pRoot = builder.Create(_T("WndSimpleFrame.xml"), (UINT)0, &cb, &m_pm);
+	CControlUI* pRoot = builder.Create(_T("main/WndSimpleFrame.xml"), (UINT)0, &cb, &m_pm);
 	ASSERT(pRoot);
 	m_pm.AttachDialog(pRoot);
 	m_pm.AddNotifier(this);

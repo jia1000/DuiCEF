@@ -2,6 +2,7 @@
 
 #include "base/Cef3/browser/cef_main_handler.h"
 #include "main/WndSimpleFrame.h"
+#include "main/WndFrameBase.h"
 
 template <class T>
 CWindowWnd* CreateMainWnd(LPCTSTR pstrName)
@@ -106,8 +107,18 @@ int APIENTRY _tWinMain(_In_ HINSTANCE hInstance,
 	}
 	
 	// ------------------显示主窗口------------------
-	CreateMainWnd<CWndSimpleFrame>(_T("SimpleWnd"));
+	//CreateMainWnd<CWndSimpleFrame>(_T("SimpleWnd"));
+    
+    CWndFrameBase *mainFrame = new CWndFrameBase();
+    //CDuilibWindowDemo *mainFrame = new CDuilibWindowDemo();
+    mainFrame->Create(NULL, _T("测试窗口")
+        , WS_OVERLAPPEDWINDOW | WS_CLIPCHILDREN | WS_CLIPSIBLINGS
+        , WS_EX_OVERLAPPEDWINDOW
+        , 0, 0, 0, 0);
+    mainFrame->CenterWindow();
+    mainFrame->ShowWindow();
 
+    
 
 	// ------------------开启消息循环------------------
 	CefMainHandler.RunMessageLoop();

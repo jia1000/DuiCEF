@@ -76,6 +76,9 @@
     <ClInclude Include="base\Cef3\browser\cef_main_handler.h">
       <Filter>base\Cef3\browser</Filter>
     </ClInclude>
+    <ClInclude Include="main\WndFrameBase.h">
+      <Filter>main</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp" />
@@ -106,6 +109,9 @@
     </ClCompile>
     <ClCompile Include="base\Cef3\control\UICefBrowser.cpp">
       <Filter>base\Cef3\control</Filter>
+    </ClCompile>
+    <ClCompile Include="main\WndFrameBase.cpp">
+      <Filter>main</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

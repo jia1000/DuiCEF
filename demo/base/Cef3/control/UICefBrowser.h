@@ -37,6 +37,7 @@ public:
 	// 进程消息处理
 	void SetProcessMessageHandler(CefRefPtr<CProcessMessageHandler> pHandler);
 
+    CefRefPtr<CefBrowser> GetCefBrowser() { return m_pBrowser; }
 private:
 	void resize();
 
