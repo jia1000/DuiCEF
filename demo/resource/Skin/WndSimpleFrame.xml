@@ -2,7 +2,7 @@
 <Window size="970,650">
 
   <VerticalLayout bkcolor="#ff2d2d30">
-    <Cef url="www.huya.com"/>
+    <Cef url="192.168.1.251/main" />
   </VerticalLayout>
 
 </Window>
