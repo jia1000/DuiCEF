@@ -7,7 +7,8 @@
 #include "../common/process_message_handler.h"
 #include "../common/cef_client_handler.h"
 
-using CefCacheTask = std::function<void(void)>;
+//using CefCacheTask = std::function<void(void)>;
+typedef std::function<void(void)> CefCacheTask;
 
 class CCefBrowserUI : public CControlUI
 {
