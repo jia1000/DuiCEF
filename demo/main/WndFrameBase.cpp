@@ -68,22 +68,28 @@ void CWndFrameBase::Notify(TNotifyUI& msg)
 		}
 		else if (_tcscmp(pszCtrlName, _T("btn_back")) == 0)
 		{            
+            m_pBrowserUI->GetCefBrowser()->GoBack();
 			//if (m_pBrowserUI && m_pBrowserUI->CanGoBack())
 			//	m_pBrowserUI->GoBack();
 		}
 		else if (_tcscmp(pszCtrlName, _T("btn_forward")) == 0)
 		{
+            m_pBrowserUI->GetCefBrowser()->GoForward();
 			//if (m_pBrowserUI && m_pBrowserUI->CanGoForward())
 			//	m_pBrowserUI->GoForward();
 		}
 		else if (_tcscmp(pszCtrlName, _T("btn_refresh")) == 0
             || _tcscmp(pszCtrlName, _T("btn_refresh_new")) == 0)
 		{
-			//if (m_pBrowserUI)
-			//	m_pBrowserUI->Reload();
+            CDuiString edit = m_pAddressEdit->GetText();
+            if (!edit.IsEmpty()) {
+	            if (m_pBrowserUI)
+	                m_pBrowserUI->GetCefBrowser()->GetMainFrame()->LoadURL(edit.GetData());
+            }
 		}
 		else if (_tcscmp(pszCtrlName, _T("btn_stop")) == 0)
 		{
+            m_pBrowserUI->GetCefBrowser()->StopLoad();
 			//if (m_pBrowserUI)
 			//	m_pBrowserUI->StopLoad();
 		}
