@@ -3,13 +3,15 @@
 <VerticalLayout bkcolor="#FFF0F0F0" bkcolor2="#FFAAAAA0"> <!-- 整个窗口的背景色 -->
         <!-- 标题栏区 -->
         <HorizontalLayout height="32" bkcolor="#FFE6E6DC" bkcolor2="#FFAAAAA0"> <!-- 标题栏背景色 bkcolor、bkcolor2、bkcolor3分别是渐变色的三个值-->     
-			<VerticalLayout width="95">
+			<VerticalLayout width="24">
 				<HorizontalLayout width="95" inset="12,6,2,6">
 					<Label name="title_ico" width="16" height="16" bkimage="file='sysbtn\logo_demo.png'"/>	
 				</HorizontalLayout>					
 			</VerticalLayout>  
 			
-            <VerticalLayout /> <!-- 占空位，占据左边所有的空位-->
+			<Label name="title_label" font="0" text="1111" textcolor="#FF000000" align="left" valign="vcenter" height="18" padding="10,8,10,8" />
+          
+            <VerticalLayout /> <!-- 占空位，占据左边所有的空位-->			
 			
             <VerticalLayout width="95"> <!-- 右边三个控件所占的宽度-->
 				<HorizontalLayout width="95" inset="2,6,2,6">
