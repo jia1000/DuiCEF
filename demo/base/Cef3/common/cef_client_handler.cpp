@@ -126,3 +126,58 @@ void CCefClientHandler::exec_on_main_thread(std::function<void(void)> task)
 		task();
 	}
 }
+bool CCefClientHandler::OnBeforePopup(
+	CefRefPtr<CefBrowser> browser,
+	CefRefPtr<CefFrame> frame,
+	const CefString& target_url,
+	const CefString& target_frame_name,
+	CefLifeSpanHandler::WindowOpenDisposition target_disposition,
+	bool user_gesture,
+	const CefPopupFeatures& popupFeatures,
+	CefWindowInfo& windowInfo,
+	CefRefPtr<CefClient>& client,
+	CefBrowserSettings& settings,
+	bool* no_javascript_access) {
+		CEF_REQUIRE_IO_THREAD();
+
+		//// Return true to cancel the popup window.
+		//return !CreatePopupWindow(browser, false, popupFeatures, windowInfo, client,
+		//                          settings);
+
+#ifdef OPEN_NEW_WINDOW
+		// 创建子窗口的逻辑交由TrayWindowManager
+		exec_on_main_thread([this, target_url]
+		{
+			TrayWindowManager::getInstance()->CreateRootWindowAsPopup(target_url);
+		});
+#else
+		//////////////////////////////////////////////////////////////////////////
+		// 禁止弹出新窗口，在当前窗口内跳转
+		switch (target_disposition) 
+		{ 
+		case WOD_NEW_FOREGROUND_TAB: 
+		case WOD_NEW_BACKGROUND_TAB: 
+		case WOD_NEW_POPUP: 
+		case WOD_NEW_WINDOW: 
+			browser->GetMainFrame()->LoadURL(target_url); 
+			return true; 
+			//cancel create 
+		} 
+		//////////////////////////////////////////////////////////////////////////
+#endif
+		return true;
+	}
+
+
+void CCefClientHandler::OnBeforeClose(CefRefPtr<CefBrowser> browser) {
+	CEF_REQUIRE_UI_THREAD();
+	
+	// Remove and delete message router handlers.
+	//auto it = message_handler_set_.begin();
+	//for (; it != message_handler_set_.end(); ++it) {
+	//	message_router_->RemoveHandler(*(it));
+	//	delete *(it);
+	//}
+	//message_handler_set_.clear();
+	//message_router_ = NULL;
+}
