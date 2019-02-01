@@ -1,9 +1,12 @@
 #include "stdafx.h"
 #include "UICefBrowser.h"
 
-CCefBrowserUI::CCefBrowserUI()
+class ICallbackDelegate;
+
+CCefBrowserUI::CCefBrowserUI(ICallbackDelegate* callbackDelegate)
 	: m_pProcessMessageHandler(new CProcessMessageHandler)
 	, m_pClientHandler(new CCefClientHandler(this))
+    , m_CallbackDelegate(callbackDelegate)
 {
 	
 }
@@ -146,4 +149,27 @@ void CCefBrowserUI::resize()
 	{
 		m_AfterCreatedCacheTasks.push([this]{ resize(); });
 	}
+}
+
+//////////////////////////////////////////////////////////////////////////
+// 为duilib窗体传入的回调接口
+void CCefBrowserUI::OnAddressChange(const CefString& url) 
+{
+    if (m_CallbackDelegate)
+        m_CallbackDelegate->OnSetAddress(url);
+}
+
+void CCefBrowserUI::OnTitleChange(const CefString& title) 
+{
+    //LOG(INFO) << "Set window title to be " << title.ToString();
+    //CGLogger::Info("Set window title to be " + title.ToString());
+
+    if (m_CallbackDelegate)
+        m_CallbackDelegate->OnSetTitle(title);
+}
+
+void CCefBrowserUI::OnFullscreenModeChange(bool fullscreen) 
+{
+    if (m_CallbackDelegate)
+        m_CallbackDelegate->OnSetFullscreen(fullscreen);
 }

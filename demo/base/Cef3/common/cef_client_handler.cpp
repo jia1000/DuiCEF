@@ -181,3 +181,69 @@ void CCefClientHandler::OnBeforeClose(CefRefPtr<CefBrowser> browser) {
 	//message_handler_set_.clear();
 	//message_router_ = NULL;
 }
+
+//////////////////////////////////////////////////////////////////////////
+// CefDisplayHandler methods
+void CCefClientHandler::OnAddressChange(CefRefPtr<CefBrowser> browser,
+                                        CefRefPtr<CefFrame> frame,
+                                        const CefString& url) 
+{
+    CEF_REQUIRE_UI_THREAD();
+
+    // Only update the address for the main (top-level) frame.
+    exec_on_main_thread([this, url]
+    {
+        m_pOwner->OnAddressChange(url);
+    });
+}
+
+void CCefClientHandler::OnTitleChange(CefRefPtr<CefBrowser> browser,
+                                      const CefString& title) 
+{
+    CEF_REQUIRE_UI_THREAD();
+
+    exec_on_main_thread([this, title]
+    {
+        m_pOwner->OnTitleChange(title);
+    });									  
+}
+
+void CCefClientHandler::OnFullscreenModeChange(CefRefPtr<CefBrowser> browser,
+                                               bool fullscreen) 
+{
+    CEF_REQUIRE_UI_THREAD();
+
+    exec_on_main_thread([this, fullscreen]
+    {
+        m_pOwner->OnFullscreenModeChange(fullscreen);
+    });
+}
+
+bool CCefClientHandler::OnConsoleMessage(CefRefPtr<CefBrowser> browser,
+                                         const CefString& message,
+                                         const CefString& source,
+                                         int line) 
+{
+    CEF_REQUIRE_UI_THREAD();
+
+    // 										 FILE* file = fopen(console_log_file_.c_str(), "a");
+    // 										 if (file) {
+    // 											 std::stringstream ss;
+    // 											 ss << "Message: " << message.ToString() << NEWLINE <<
+    // 												 "Source: " << source.ToString() << NEWLINE <<
+    // 												 "Line: " << line << NEWLINE <<
+    // 												 "-----------------------" << NEWLINE;
+    // 											 fputs(ss.str().c_str(), file);
+    // 											 fclose(file);
+    // 
+    // 											 // 不再弹出对话框
+    // 											 //if (first_console_message_) {
+    // 											 //  test_runner::Alert(
+    // 											 //      browser, "Console messages written to \"" + console_log_file_ + "\"");
+    // 											 //  first_console_message_ = false;
+    // 											 //}
+    // 										 }
+
+    return false;
+}
+//////////////////////////////////////////////////////////////////////////

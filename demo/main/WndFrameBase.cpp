@@ -12,7 +12,7 @@
 //////////////////////////////////////////////////////////////////////////
 CWndFrameBase::CWndFrameBase(void)
 {
-	m_pBrowserUI = new CCefBrowserUI();
+	m_pBrowserUI = new CCefBrowserUI(this);
 }
 
 CWndFrameBase::~CWndFrameBase(void)

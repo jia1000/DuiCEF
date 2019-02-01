@@ -13,6 +13,7 @@ class CCefClientHandler
 	, public CefContextMenuHandler
 	, public CefLoadHandler
 	, public CefDragHandler
+    , public CefDisplayHandler
 {
 public:
 	CCefClientHandler(CCefBrowserUI* pOwner) :m_pOwner(pOwner){}
@@ -21,6 +22,7 @@ public:
 	CefRefPtr<CefContextMenuHandler>	GetContextMenuHandler()		{ return this; }
 	CefRefPtr<CefLoadHandler>			GetLoadHandler()			{ return this; }
 	CefRefPtr<CefDragHandler>			GetDragHandler()			{ return this; }
+    CefRefPtr<CefDisplayHandler>		GetDisplayHandler()			{ return this; }
 
 	void CreateBrowser(HWND hParentWnd, RECT rc);
 	void CloseBrowser(CefRefPtr<CefBrowser> browser);
@@ -76,6 +78,19 @@ public:
 	bool OnDragEnter(CefRefPtr<CefBrowser> browser
 		, CefRefPtr<CefDragData> dragData
 		, DragOperationsMask mask)OVERRIDE;
+
+    // CefDisplayHandler methods
+    void OnAddressChange(CefRefPtr<CefBrowser> browser,
+        CefRefPtr<CefFrame> frame,
+        const CefString& url) OVERRIDE;
+    void OnTitleChange(CefRefPtr<CefBrowser> browser,
+        const CefString& title) OVERRIDE;
+    void OnFullscreenModeChange(CefRefPtr<CefBrowser> browser,
+        bool fullscreen) OVERRIDE;
+    bool OnConsoleMessage(CefRefPtr<CefBrowser> browser,
+        const CefString& message,
+        const CefString& source,
+        int line) OVERRIDE;
 
 private:
 	void exec_on_main_thread(std::function<void(void)> task);
